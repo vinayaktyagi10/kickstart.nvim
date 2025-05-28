@@ -21,6 +21,10 @@ If you are experiencing issues, please make sure you have the latest versions.
 
 ### Install External Dependencies
 
+
+making this change to get an idea on how the whole git thing works now. :)
+
+
 External Requirements:
 - Basic utils: `git`, `make`, `unzip`, C Compiler (`gcc`)
 - [ripgrep](https://github.com/BurntSushi/ripgrep#installation),
