@@ -176,6 +176,25 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+vim.keymap.set('n', '<F5>', function()
+  vim.cmd('write') -- save file
+
+  local file = vim.fn.expand('%')
+  local output = vim.fn.expand('%:r')
+
+  -- open terminal in a split, compile and run, then keep terminal open (bash -c with read)
+  local cmd = string.format(
+    'split | terminal bash -c "g++ -std=c++17 -Wall -Wextra %s -o %s && ./%s; echo; echo Press Enter to exit...; read"',
+    file, output, output
+  )
+
+  vim.cmd(cmd)
+
+  -- optional: focus terminal window immediately
+  vim.cmd('wincmd j')
+end, { desc = 'Compile and run current C++ file' })
+
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
